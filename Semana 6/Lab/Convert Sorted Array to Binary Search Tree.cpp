@@ -13,31 +13,18 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-void createTree(TreeNode* bst, int value) {
-    if (bst->val<value) {
-        if(bst->left!=nullptr) {
-            bst->left=new TreeNode(value);
-        }
-        else createTree(bst->left,value);
-    }
-    if (bst->val>value) {
-        if(bst->right!=nullptr) {
-            bst->right=new TreeNode(value);
-        }
-        else createTree(bst->right,value);
-    }
+TreeNode* addNode(vector<int> nums,int x, int y) {
+    if (x>y) return nullptr;
+    int mid=x+(y-x)/2;
+    TreeNode* temp=new TreeNode(nums[mid]);
+    temp->left=addNode(nums,x,mid-1);
+    temp->right=addNode(nums,mid+1,y);
+    return temp;
 }
 
 TreeNode* sortedArrayToBST(vector<int>& nums) {
-    if(nums.size()==0) return nullptr;
-    int x=nums.size()/2;
-    TreeNode bst(nums[x]);
-    for (auto i:nums) {
-        if(i!=x) {
-            createTree(&bst,i);
-        }
-    }
-    return bst;
+    if (nums.size()==0) return nullptr;
+    return addNode(nums,0,nums.size()-1);
 }
 
 
