@@ -1,0 +1,17 @@
+Pilas:
+- Last in first out
+
+
+Colas:
+- First in first out
+
+Ejercicios a practicar
+
+- Stack con double link list
+- Parentesis
+- Fibonacci con O(n)
+- Implementar una pila usando 2 colas
+- Implementar una cola usando 2 pilas
+
+Iterators:
+
