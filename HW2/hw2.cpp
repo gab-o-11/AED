@@ -72,51 +72,9 @@ T Heap<T>::extractTop() {
         }
         T lastValue = data[this->size()-1];
         data.pop_back();
+        data[0]=lastValue;
+        heapify(this->minHeap,0);
 
-        int i = 0;
-        while (true) {
-            int left = left(i);
-            int right = right(i);
-            int change = -1;
-
-            if (minHeap) {
-                if (left < data.size() && data[left] < lastValue) {
-                    change = left;
-                }
-                if (right < data.size()) {
-                    if (change == -1) {
-                        if (data[right] < lastValue) {
-                            change = right;
-                        }
-                    } else {
-                        if (data[right] < data[left]) {
-                            change = right;
-                        }
-                    }
-                }
-            } else {
-                if (left < data.size() && data[left] > lastValue) {
-                    change = left;
-                }
-                if (right < data.size()) {
-                    if (change == -1) {
-                        if (data[right] > lastValue) {
-                            change = right;
-                        }
-                    } else {
-                        if (data[right] > data[left]) {
-                            change = right;
-                        }
-                    }
-                }
-            }
-            if (change == -1) {
-                data[i] = lastValue;
-                break;
-            }
-            data[i] = data[change];
-            i = change;
-        }
         return top;
     }
 }
